@@ -1,0 +1,75 @@
+* {
+    /* background-color: rgb(180, 228, 228); */
+    margin: 0;
+}
+
+.head {
+    color: blueviolet;
+}
+
+.head::first-letter {
+    font-size: 80px;
+}
+
+p {
+    color: green;
+    font-size: 25px;
+
+}
+
+p::first-line {
+    color: red;
+}
+
+.box p {
+    color: red;
+}
+
+.box p::after {
+    content: " after";
+
+}
+
+.box p::before {
+    content: "before ";
+
+}
+
+#container,
+.content,
+.box {
+    background-color: blue;
+    height: 200px;
+    width: 200px;
+    margin: 10px
+}
+
+#container:active {
+    background-color: cadetblue;
+}
+
+.content:hover {
+    background-color: red;
+}
+
+.box {
+    background-color: cadetblue;
+    padding: 10px;
+    /* padding: 10px 20px; */
+    /* padding: 10px 20px 30px; */
+    /* padding: 10px 20px 30px 40px; */
+
+    color: blue;
+    /* border-width: 10px;
+    border-style: solid;
+    border-color: red; */
+    /* border: 15px solid blueviolet; */
+    /* border: 15px dashed blueviolet; */
+    /* border: 15px dotted blueviolet; */
+    border: 15px double blueviolet;
+
+    /* margin: 10px; */
+    margin: 10px 20px;
+    /* margin: 10px 20px 30px; */
+    /* margin: 10px 20px 30px 40px; */
+}
