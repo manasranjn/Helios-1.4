@@ -84,18 +84,23 @@
 }
 
 .absolute {
+    background-color: aliceblue;
     position: absolute;
     top: 20px;
-    right: 20px;
+    z-index: 10;
+    /* right: 20px; */
 }
 
 .fixed {
+    background-color: blueviolet;
     position: fixed;
     top: 50px;
+    z-index: -1;
     right: 200px;
 }
 
 .sticky {
+    background-color: aqua;
     position: sticky;
     bottom: 5px;
     left: 100px;
