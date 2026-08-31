@@ -3,7 +3,7 @@ const menubar = document.querySelector('.nav-links')
 const close = document.getElementById('close')
 
 menu.onclick = () => {
-    menubar.style.transform = 'translateX(20%)'
+    menubar.style.transform = 'translateX(15%)'
 }
 
 close.onclick = () => {
