@@ -1,0 +1,12 @@
+.box {
+    height: 400px;
+    width: 600px;
+    /* background: linear-gradient(45deg, red, blue, green, black); */
+    /* background: radial-gradient(ellipse, red, blue); */
+    /* background: radial-gradient(circle at center, red 0, blue, green 100%); */
+    /* background: radial-gradient(red, blue, green); */
+    /* background-image: radial-gradient(red 5%, green 15%, blue 60%); */
+    /* background-image: radial-gradient(circle, red, yellow, green); */
+    /* background-image: radial-gradient(closest-side at 60% 55%, blue, green, yellow, black); */
+    /* background-image: radial-gradient(farthest-side at 60% 55%, blue, green, yellow, black); */
+}
