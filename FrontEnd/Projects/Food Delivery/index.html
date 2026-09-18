@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodHub</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
+        integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<!-- sm, md, lg, xl -->
+
+<body>
+    <header class="bg-slate-300 px-10 lg:px-20 py-2 justify-between items-center hidden md:flex">
+        <div class="flex gap-4">
+            <p><i class="fa-solid fa-envelope"></i> example@gmail.com</p>
+            <p> <i class="fa-solid fa-location-dot"></i> Bhubaneswar, Odisha</p>
+        </div>
+
+        <div class="flex gap-4 text-2xl">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-youtube"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
+    </header>
+
+
+    <nav class="bg-white px-6 md:px-10 lg:px-20 py-4 flex justify-between items-center shadow-xl">
+        <h2 class="text-3xl text-orange-500 font-bold">FoodHub</h2>
+
+        <ul class="hidden md:flex gap-4 list-none font-semibold">
+            <li>
+                <a href="#hero" class="hover:text-orange-500">Home</a>
+            </li>
+            <li>
+                <a href="#category" class="hover:text-orange-500">Category</a>
+            </li>
+            <li>
+                <a href="#menu" class="hover:text-orange-500">Menu</a>
+            </li>
+            <li>
+                <a href="#contact" class="hover:text-orange-500">Contact</a>
+            </li>
+        </ul>
+
+        <div>
+            <button class="px-6 py-2 rounded bg-orange-500 cursor-pointer text-white"><i
+                    class="fa-solid fa-cart-plus"></i></button>
+        </div>
+    </nav>
+
+    <section id="hero"
+        class="bg-[url(https://cdn.pixabay.com/photo/2017/09/28/18/13/bread-2796393_1280.jpg)] h-[500px] relative">
+
+        <div class="h-full w-full bg-black opacity-70 absolute"></div>
+
+        <div class="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+            <p class="text-orange-500 text-base md:text-xl font-semibold">Fresh • Healthy • Organic</p>
+            <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold my-3">Welcome to <span
+                    class="text-orange-500">FoodHub</span></h2>
+            <h5 class="text-base md:text-xl">Discover the best food in Bhubaneswar</h5>
+            <button class="bg-orange-500 rounded px-4 py-2 text-lg mt-3 cursor-pointer">Explore Menu</button>
+        </div>
+
+    </section>
+
+    <section id="category" class="px-20 py-10 bg-white shadow">
+        <div>
+            <p class="text-lg font-semibold text-orange-500">Browse</p>
+            <h4 class="text-3xl font-bold">Explore Categories</h4>
+        </div>
+
+        <div id="allCategory" class="flex gap-4 mt-10 overflow-x-scroll py-4 scrollbar-none">
+
+        </div>
+    </section>
+
+
+    <!-- <script src="./script.js"></script> -->
+</body>
+
+</html>
