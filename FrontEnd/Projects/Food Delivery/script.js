@@ -303,15 +303,44 @@ const foodItems = [
 
 const categoryContainer = document.getElementById('allCategory')
 
-foodItems.forEach((item) => {
-    // console.log(item);
+const categories = [...new Set(foodItems.map(item => item.category))]
+
+// console.log(categories);
+
+
+categories.forEach((category) => {
+    const item = foodItems.find(food => food.category === category)
+
+    console.log(item);
+
+
     const box = document.createElement('div')
-    box.innerHTML = `<img src=${item.image} alt=${item.name} class='h-3/4 w-full object-cover'/>
-        <h3 class='text-center'> ${item.category} </h3>
+
+    box.innerHTML = `
+        <img 
+            src="${item.image}" 
+            alt="${category}" 
+            class="h-3/4 w-full object-cover rounded"
+        />
+
+        <h3 class="text-center font-semibold mt-2">
+            ${category}
+        </h3>
     `
 
-    box.classList = 'p-4 border-2 rounded border-gray-400 h-[150px] w-[150px]'
+    box.className = `
+        p-3 
+        border-2 
+        rounded 
+        border-gray-300 
+        h-[150px] 
+        w-[150px] 
+        flex-shrink-0
+        cursor-pointer
+        hover:border-orange-500
+        hover:shadow-md
+        transition
+    `
 
     categoryContainer.append(box)
-
 })
