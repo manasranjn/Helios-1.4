@@ -9,76 +9,261 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css"
         integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
 </head>
 
-<!-- sm, md, lg, xl -->
 
-<body>
-    <header class="bg-slate-300 px-10 lg:px-20 py-2 justify-between items-center hidden md:flex">
-        <div class="flex gap-4">
-            <p><i class="fa-solid fa-envelope"></i> example@gmail.com</p>
-            <p> <i class="fa-solid fa-location-dot"></i> Bhubaneswar, Odisha</p>
+<body class="bg-slate-50">
+
+    <header class="bg-slate-300 px-6 lg:px-20 py-2 justify-between items-center hidden md:flex">
+
+        <div class="flex gap-6">
+
+            <p>
+                <i class="fa-solid fa-envelope mr-1"></i>
+                example@gmail.com
+            </p>
+
+            <p>
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                Bhubaneswar, Odisha
+            </p>
+
         </div>
 
         <div class="flex gap-4 text-2xl">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-youtube"></i>
-            <i class="fa-brands fa-x-twitter"></i>
+
+            <i class="fa-brands fa-instagram cursor-pointer hover:text-orange-500"></i>
+
+            <i class="fa-brands fa-square-facebook cursor-pointer hover:text-orange-500"></i>
+
+            <i class="fa-brands fa-square-youtube cursor-pointer hover:text-orange-500"></i>
+
+            <i class="fa-brands fa-x-twitter cursor-pointer hover:text-orange-500"></i>
+
         </div>
+
     </header>
 
+    <nav class="bg-white px-6 md:px-10 lg:px-20 py-4 flex justify-between items-center shadow-md sticky top-0 z-30">
+        <h2 class="text-3xl text-orange-500 font-bold">
+            FoodHub
+        </h2>
 
-    <nav class="bg-white px-6 md:px-10 lg:px-20 py-4 flex justify-between items-center shadow-xl">
-        <h2 class="text-3xl text-orange-500 font-bold">FoodHub</h2>
-
-        <ul class="hidden md:flex gap-4 list-none font-semibold">
+        <ul class="hidden md:flex gap-6 list-none font-semibold">
             <li>
-                <a href="#hero" class="hover:text-orange-500">Home</a>
+                <a href="#hero" class="hover:text-orange-500 transition">
+                    Home
+                </a>
             </li>
             <li>
-                <a href="#category" class="hover:text-orange-500">Category</a>
+                <a href="#category" class="hover:text-orange-500 transition">
+                    Category
+                </a>
             </li>
             <li>
-                <a href="#menu" class="hover:text-orange-500">Menu</a>
+                <a href="#menu" class="hover:text-orange-500 transition">
+                    Menu
+                </a>
             </li>
             <li>
-                <a href="#contact" class="hover:text-orange-500">Contact</a>
+                <a href="#contact" class="hover:text-orange-500 transition">
+                    Contact
+                </a>
             </li>
         </ul>
 
-        <div>
-            <button class="px-6 py-2 rounded bg-orange-500 cursor-pointer text-white"><i
-                    class="fa-solid fa-cart-plus"></i></button>
-        </div>
+        <button id="cartButton"
+            class="relative px-5 py-2 rounded-lg bg-orange-500 hover:bg-orange-600 cursor-pointer text-white transition">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <!-- Cart Badge -->
+
+            <span id="cartBadge"
+                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                0
+            </span>
+        </button>
     </nav>
 
-    <section id="hero"
-        class="bg-[url(https://cdn.pixabay.com/photo/2017/09/28/18/13/bread-2796393_1280.jpg)] h-[500px] relative">
+    <section id="hero" class="bg-[url('https://cdn.pixabay.com/photo/2017/09/28/18/13/bread-2796393_1280.jpg')]
+        bg-cover bg-center h-[500px] relative">
+        <div class="h-full w-full bg-black/70 absolute inset-0"></div>
 
-        <div class="h-full w-full bg-black opacity-70 absolute"></div>
+        <div class="absolute text-white top-1/2 left-1/2
+            -translate-x-1/2 -translate-y-1/2
+            text-center w-full px-5">
 
-        <div class="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-            <p class="text-orange-500 text-base md:text-xl font-semibold">Fresh • Healthy • Organic</p>
-            <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold my-3">Welcome to <span
-                    class="text-orange-500">FoodHub</span></h2>
-            <h5 class="text-base md:text-xl">Discover the best food in Bhubaneswar</h5>
-            <button class="bg-orange-500 rounded px-4 py-2 text-lg mt-3 cursor-pointer">Explore Menu</button>
+            <p class="text-orange-500 text-base md:text-xl font-semibold">
+                Fresh • Healthy • Organic
+            </p>
+
+            <h2 class="text-3xl md:text-4xl lg:text-6xl font-bold my-3">
+                Welcome to
+                <span class="text-orange-500">
+                    FoodHub
+                </span>
+            </h2>
+            <h5 class="text-base md:text-xl">
+                Discover the best food in Bhubaneswar
+            </h5>
+
+            <a href="#menu" class="inline-block bg-orange-500 hover:bg-orange-600
+                rounded-lg px-6 py-3 text-lg mt-5 cursor-pointer transition">
+                Explore Menu
+            </a>
         </div>
-
     </section>
 
-    <section id="category" class="px-20 py-10 bg-white shadow">
+    <section id="category" class="px-6 md:px-10 lg:px-20 py-10 bg-white shadow">
         <div>
-            <p class="text-lg font-semibold text-orange-500">Browse</p>
-            <h4 class="text-3xl font-bold">Explore Categories</h4>
+            <p class="text-lg font-semibold text-orange-500">
+                Browse
+            </p>
+            <h4 class="text-3xl font-bold">
+                Explore Categories
+            </h4>
         </div>
 
         <div id="allCategory" class="flex gap-4 mt-6 overflow-x-auto py-4 scrollbar-none">
 
         </div>
+
     </section>
 
+
+
+    <!-- FOOD SECTION -->
+
+    <section id="menu" class="px-6 md:px-10 lg:px-20 py-12 bg-slate-50">
+        <!-- Menu Heading -->
+        <div class="flex flex-col md:flex-row
+            justify-between md:items-end gap-3">
+            <div>
+                <p class="text-lg font-semibold text-orange-500">
+                    Our Menu
+                </p>
+                <h4 class="text-3xl font-bold">
+                    Delicious Food
+                </h4>
+            </div>
+
+            <p id="foodCount" class="text-gray-500">
+            </p>
+        </div>
+
+        <div id="foodContainer" class="grid grid-cols-1 sm:grid-cols-2
+            lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-8">
+
+        </div>
+    </section>
+
+    <section id="contact" class="bg-white px-6 md:px-10 lg:px-20 py-12">
+        <div class="text-center">
+            <p class="text-orange-500 font-semibold text-lg">
+                Contact Us
+            </p>
+            <h2 class="text-3xl font-bold">
+                Get In Touch
+            </h2>
+            <p class="text-gray-500 mt-3">
+                Have questions? We'd love to hear from you.
+            </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row justify-center
+            gap-6 mt-8 text-center">
+            <div class="p-5">
+                <i class="fa-solid fa-envelope text-2xl text-orange-500"></i>
+                <p class="font-semibold mt-2">
+                    Email
+                </p>
+                <p class="text-gray-500">
+                    example@gmail.com
+                </p>
+            </div>
+
+            <div class="p-5">
+                <i class="fa-solid fa-location-dot text-2xl text-orange-500"></i>
+                <p class="font-semibold mt-2">
+                    Location
+                </p>
+                <p class="text-gray-500">
+                    Bhubaneswar, Odisha
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="bg-slate-900 text-white text-center py-6">
+        <h2 class="text-2xl font-bold text-orange-500">
+            FoodHub
+        </h2>
+        <p class="text-gray-400 mt-2">
+            Fresh • Healthy • Delicious
+        </p>
+        <p class="text-gray-500 text-sm mt-4">
+            © 2026 FoodHub. All rights reserved.
+        </p>
+    </footer>
+
+
+
+    <!-- CART -->
+
+
+    <div id="cartOverlay" class="fixed inset-0 bg-black/70 z-40 hidden">
+    </div>
+
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-[420px]
+        bg-white z-50 translate-x-full
+        transition-transform duration-300
+        flex flex-col">
+
+        <div class="flex justify-between items-center p-5 border-b">
+            <div>
+                <h2 class="text-2xl font-bold">
+                    Your Cart
+                </h2>
+                <p id="cartItemCount" class="text-sm text-gray-500">
+                    0 items
+                </p>
+            </div>
+
+            <button id="closeCart" class="text-2xl text-gray-500
+                hover:text-red-500 cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div id="cartContainer" class="flex-1 overflow-y-auto p-5">
+        </div>
+
+        <div class="border-t p-5 bg-white">
+            <div class="flex justify-between
+                text-lg font-bold mb-4">
+                <span>
+                    Total
+                </span>
+                <span>
+                    ₹<span id="cartTotal">0</span>
+                </span>
+            </div>
+            <button class="w-full bg-orange-500
+                hover:bg-orange-600
+                text-white py-3 rounded-lg
+                font-semibold cursor-pointer transition">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
 
     <script src="./script.js"></script>
 </body>

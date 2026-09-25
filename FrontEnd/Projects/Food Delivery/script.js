@@ -301,46 +301,677 @@ const foodItems = [
     }
 ]
 
-const categoryContainer = document.getElementById('allCategory')
+const categoryContainer = document.getElementById("allCategory");
+const foodContainer = document.getElementById("foodContainer");
+const foodCount = document.getElementById("foodCount");
+const cartButton = document.getElementById("cartButton");
+const cartSidebar = document.getElementById("cartSidebar");
+const cartOverlay = document.getElementById("cartOverlay");
+const closeCart = document.getElementById("closeCart");
+const cartContainer = document.getElementById("cartContainer");
+const cartTotal = document.getElementById("cartTotal");
+const cartBadge = document.getElementById("cartBadge");
+const cartItemCount = document.getElementById("cartItemCount");
 
-const categories = [...new Set(foodItems.map(item => item.category))]
+let cart =
+    JSON.parse(localStorage.getItem("foodhub-cart")) || [];
 
-// console.log(categories);
+function saveCart() {
+    localStorage.setItem(
+        "foodhub-cart",
+        JSON.stringify(cart)
+    );
+}
+
+const categories = ["All", ...new Set(foodItems.map(item => item.category))];
+
+function displayCategories() {
+    categoryContainer.innerHTML = "";
+
+    categories.forEach(category => {
+        let item;
+        if (category === "All") {
+            item = foodItems[0];
+        } else {
+            item = foodItems.find(food => food.category === category);
+        }
+        const box = document.createElement("div");
+
+        box.className = `
+            p-3
+            border-2
+            rounded-xl
+            border-gray-300
+            h-[150px]
+            w-[150px]
+            flex-shrink-0
+            cursor-pointer
+            bg-white
+            hover:border-orange-500
+            hover:shadow-lg
+            transition
+            duration-300
+        `;
+
+        box.innerHTML = `
+            <img
+                src="${item.image}"
+                alt="${category}"
+                class="h-[95px] w-full
+                object-cover rounded-lg"
+            />
+
+            <h3
+                class="text-center font-semibold mt-2">
+                ${category}
+            </h3>
+        `;
+
+        box.addEventListener(
+            "click",
+            () => {
+                displayFoods(category);
+
+                document.getElementById("menu").scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+        );
+        categoryContainer.appendChild(box);
+    });
+}
+
+//! DISPLAY FOOD
+function displayFoods(category = "All") {
+    foodContainer.innerHTML = "";
+    let filteredFoods;
+    if (category === "All") {
+        filteredFoods = foodItems;
+    } else {
+        filteredFoods =
+            foodItems.filter(
+                food =>
+                    food.category === category
+            );
+    }
+
+    foodCount.innerText =
+        `${filteredFoods.length} items available`;
 
 
-categories.forEach((category) => {
-    const item = foodItems.find(food => food.category === category)
+    if (filteredFoods.length === 0) {
 
-    console.log(item);
+        foodContainer.innerHTML = `
+            <div
+                class="col-span-full
+                text-center py-16">
+                <i
+                    class="fa-solid fa-utensils
+                    text-5xl text-gray-300">
+                </i>
+                <h3
+                    class="text-xl font-semibold mt-4">
+                    No food found
+                </h3>
+                <p
+                    class="text-gray-500 mt-2">
+                    Try another category.
+                </p>
+            </div>
+        `;
+
+        return;
+
+    }
 
 
-    const box = document.createElement('div')
+    // Create food cards
 
-    box.innerHTML = `
-        <img 
-            src="${item.image}" 
-            alt="${category}" 
-            class="h-3/4 w-full object-cover rounded"
-        />
+    filteredFoods.forEach(food => {
 
-        <h3 class="text-center font-semibold mt-2">
-            ${category}
-        </h3>
-    `
+        const card =
+            document.createElement("div");
 
-    box.className = `
-        p-3 
-        border-2 
-        rounded 
-        border-gray-300 
-        h-[150px] 
-        w-[150px] 
-        flex-shrink-0
-        cursor-pointer
-        hover:border-orange-500
-        hover:shadow-md
-        transition
-    `
 
-    categoryContainer.append(box)
-})
+        card.className = `
+            bg-white
+            rounded-xl
+            overflow-hidden
+            shadow-md
+            hover:shadow-xl
+            transition
+            duration-300
+            group
+        `;
+
+
+        card.innerHTML = `
+            <div class="relative overflow-hidden">
+                <img
+                    src="${food.image}"
+                    alt="${food.name}"
+                    class="w-full h-[220px]
+                    object-cover
+                    group-hover:scale-105
+                    transition
+                    duration-500"
+                />
+                <!-- VEG -->
+                <span
+                    class="
+                    absolute
+                    top-3
+                    left-3
+                    px-2
+                    py-1
+                    rounded
+                    text-xs
+                    font-semibold
+                    ${food.isVeg ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}">
+                    ${food.isVeg ? "VEG" : "NON-VEG"}
+                </span>
+                <!-- RATING -->
+                <span
+                    class="
+                    absolute
+                    top-3
+                    right-3
+                    bg-white
+                    px-2
+                    py-1
+                    rounded
+                    text-sm
+                    font-semibold
+                    shadow
+                    ">
+                    ⭐ ${food.rating}
+                </span>
+            </div>
+
+            <!-- CONTENT -->
+
+            <div class="p-4">
+                <!-- NAME + PRICE -->
+                <div
+                    class="flex justify-between items-start gap-2">
+                    <h3 class="text-lg font-bold">
+                        ${food.name}
+                    </h3>
+                    <span class="text-orange-500 font-bold whitespace-nowrap">
+                        ₹${food.price}
+                    </span>
+                </div>
+
+                <!-- DESCRIPTION -->
+                <p class=" text-sm text-gray-500 mt-2 line-clamp-2">
+                    ${food.description}
+                </p>
+                <!-- CATEGORY + BUTTON -->
+
+                <div class=" flex justify-between items-center mt-4">
+                    <span class=" text-sm text-gray-400">
+                        ${food.category}
+                    </span>
+
+                    <button
+                        onclick="addToCart(${food.id})"
+                        class=" bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg cursor-pointer transition">
+                        <i class=" fa-solid fa-cart-plus"></i>
+                        Add
+                    </button>
+                </div>
+            </div>
+        `;
+        foodContainer.appendChild(card);
+
+    });
+
+}
+
+function addToCart(foodId) {
+    // Find food
+    const food =
+        foodItems.find(
+            item =>
+                item.id === foodId
+        );
+
+    if (!food) {
+        return;
+    }
+
+
+    // Check if already in cart
+    const existingItem =
+        cart.find(
+            item =>
+                item.id === foodId
+        );
+
+    if (existingItem) {
+        // Increase quantity
+        existingItem.quantity += 1;
+    } else {
+        // Add new item
+        cart.push({
+            ...food,
+            quantity: 1
+        });
+    }
+
+    // Save
+    saveCart();
+
+    // Update UI
+    updateCart();
+
+    // Open cart
+    openCart();
+}
+
+
+function updateCart() {
+    cartContainer.innerHTML = "";
+
+    // Empty cart
+    if (cart.length === 0) {
+
+        cartContainer.innerHTML = `
+
+            <div
+                class="
+                flex
+                flex-col
+                items-center
+                justify-center
+                h-full
+                text-center">  
+
+                <i
+                    class="
+                    fa-solid
+                    fa-cart-shopping
+                    text-6xl
+                    text-gray-300">
+                </i>
+
+
+                <h3
+                    class="
+                    text-xl
+                    font-semibold
+                    mt-4">
+
+                    Your cart is empty
+
+                </h3>
+
+
+                <p
+                    class="
+                    text-gray-500
+                    mt-1">
+
+                    Add some delicious food!
+
+                </p>
+
+            </div>
+
+        `;
+
+
+        cartTotal.innerText = "0";
+
+        cartBadge.innerText = "0";
+
+        cartItemCount.innerText =
+            "0 items";
+
+
+        return;
+
+    }
+
+
+    // Total variables
+
+    let total = 0;
+
+    let totalItems = 0;
+
+
+    // Create cart items
+
+    cart.forEach(item => {
+
+        total +=
+            item.price *
+            item.quantity;
+
+
+        totalItems +=
+            item.quantity;
+
+
+        const cartItem =
+            document.createElement("div");
+
+
+        cartItem.className = `
+            flex
+            gap-3
+            border-b
+            pb-4
+            mb-4
+        `;
+
+
+        cartItem.innerHTML = `
+
+            <!-- IMAGE -->
+
+            <img
+                src="${item.image}"
+                alt="${item.name}"
+                class="
+                w-20
+                h-20
+                object-cover
+                rounded-lg
+                flex-shrink-0
+                ">
+
+
+            <!-- DETAILS -->
+
+            <div class="flex-1">
+
+
+                <!-- NAME + DELETE -->
+
+                <div
+                    class="
+                    flex
+                    justify-between
+                    gap-2">
+
+                    <h3
+                        class="
+                        font-semibold
+                        text-sm">
+
+                        ${item.name}
+
+                    </h3>
+
+
+                    <button
+                        onclick="removeFromCart(${item.id})"
+                        class="
+                        text-red-500
+                        hover:text-red-700
+                        cursor-pointer">
+
+                        <i
+                            class="
+                            fa-solid
+                            fa-trash">
+                        </i>
+
+                    </button>
+
+                </div>
+
+
+
+                <!-- PRICE -->
+
+                <p
+                    class="
+                    text-orange-500
+                    font-semibold
+                    mt-1">
+
+                    ₹${item.price}
+
+                </p>
+
+
+
+                <!-- QUANTITY -->
+
+                <div
+                    class="
+                    flex
+                    items-center
+                    gap-3
+                    mt-2">
+
+
+                    <!-- DECREASE -->
+
+                    <button
+                        onclick="decreaseQuantity(${item.id})"
+                        class="
+                        w-7
+                        h-7
+                        rounded-full
+                        bg-gray-200
+                        hover:bg-orange-500
+                        hover:text-white
+                        cursor-pointer">
+
+                        -
+
+                    </button>
+
+
+
+                    <!-- QUANTITY -->
+
+                    <span
+                        class="font-semibold">
+
+                        ${item.quantity}
+
+                    </span>
+
+
+
+                    <!-- INCREASE -->
+
+                    <button
+                        onclick="increaseQuantity(${item.id})"
+                        class="
+                        w-7
+                        h-7
+                        rounded-full
+                        bg-gray-200
+                        hover:bg-orange-500
+                        hover:text-white
+                        cursor-pointer">
+
+                        +
+
+                    </button>
+
+
+
+                    <!-- ITEM TOTAL -->
+
+                    <span
+                        class="
+                        ml-auto
+                        font-semibold">
+
+                        ₹${item.price * item.quantity}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        cartContainer.appendChild(cartItem);
+
+    });
+
+
+    // Update totals
+
+    cartTotal.innerText =
+        total.toLocaleString("en-IN");
+
+
+    cartBadge.innerText =
+        totalItems;
+
+
+    cartItemCount.innerText =
+        `${totalItems} ${totalItems === 1 ? "item" : "items"}`;
+
+}
+
+function increaseQuantity(foodId) {
+
+    const item =
+        cart.find(
+            item =>
+                item.id === foodId
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    item.quantity++;
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+function decreaseQuantity(foodId) {
+
+    const item =
+        cart.find(
+            item =>
+                item.id === foodId
+        );
+
+
+    if (!item) {
+
+        return;
+
+    }
+
+
+    if (item.quantity > 1) {
+
+        item.quantity--;
+
+    } else {
+
+        cart =
+            cart.filter(
+                item =>
+                    item.id !== foodId
+            );
+
+    }
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+function removeFromCart(foodId) {
+
+    cart =
+        cart.filter(
+            item =>
+                item.id !== foodId
+        );
+
+
+    saveCart();
+
+    updateCart();
+
+}
+
+
+function openCart() {
+
+    cartSidebar.classList.remove(
+        "translate-x-full"
+    );
+
+
+    cartOverlay.classList.remove(
+        "hidden"
+    );
+
+
+    document.body.classList.add(
+        "overflow-hidden"
+    );
+
+}
+
+
+function closeCartSidebar() {
+
+    cartSidebar.classList.add(
+        "translate-x-full"
+    );
+
+
+    cartOverlay.classList.add(
+        "hidden"
+    );
+
+
+    document.body.classList.remove(
+        "overflow-hidden"
+    );
+
+}
+
+
+cartButton.addEventListener(
+    "click",
+    openCart
+);
+
+
+closeCart.addEventListener(
+    "click",
+    closeCartSidebar
+);
+
+
+cartOverlay.addEventListener(
+    "click",
+    closeCartSidebar
+);
+
+
+displayCategories();
+
+displayFoods("All");
+
+updateCart();
