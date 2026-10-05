@@ -14,7 +14,7 @@ const NewsCard = ({ blog }) => {
       }}
     >
       <img src={image} alt={title} style={{ height: "200px", width: "100%" }} />
-      <h2>{title}</h2>
+      <h2 className="text-3xl">{title}</h2>
       <h5>{category}</h5>
       <p>{content}</p>
       <span>{date}</span>
