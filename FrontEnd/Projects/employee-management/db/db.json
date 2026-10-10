@@ -1,0 +1,19 @@
+{
+  "employees": [
+    {
+      "name": "Smith",
+      "salary": "40000",
+      "experience": "2",
+      "designation": "SDE",
+      "id": "2pjU5ItZCCg"
+    },
+    {
+      "name": "Allen",
+      "salary": "40000",
+      "experience": "2",
+      "designation": "Web Developer",
+      "id": "DV-HfRFnAAk"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
