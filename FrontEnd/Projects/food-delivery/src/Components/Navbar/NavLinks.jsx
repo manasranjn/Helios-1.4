@@ -2,18 +2,44 @@ import React from "react";
 import { FaCartPlus } from "react-icons/fa";
 
 const NavLinks = ({ cartCount, onCartClick }) => {
-  const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const scrollTo = (id) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <nav className="sticky top-0 z-40 px-6 lg:px-20 flex justify-between items-center bg-white py-3 shadow-md">
-      <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-3xl font-bold text-orange-500">
+      <button
+        type="button"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="text-3xl font-bold text-orange-500"
+      >
         FoodHub
       </button>
 
       <ul className="hidden md:flex gap-6 font-medium">
-        <li><button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="hover:text-orange-500">Home</button></li>
-        <li><button onClick={() => scrollTo("categories")} className="hover:text-orange-500">Categories</button></li>
-        <li><button onClick={() => scrollTo("menu")} className="hover:text-orange-500">Menu</button></li>
+        <li>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="hover:text-orange-500"
+          >
+            Home
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => scrollTo("categories")}
+            className="hover:text-orange-500"
+          >
+            Categories
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => scrollTo("menu")}
+            className="hover:text-orange-500"
+          >
+            Menu
+          </button>
+        </li>
       </ul>
 
       <button
