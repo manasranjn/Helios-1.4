@@ -13,7 +13,12 @@ const App = () => {
     const seen = new Set();
 
     return [
-      { name: "All", image: foodItems[0]?.image, count: foodItems.length },
+      {
+        name: "All",
+        image:
+          "https://cdn.pixabay.com/photo/2022/06/23/09/39/food-and-drink-industry-7279389_1280.jpg",
+        count: foodItems.length,
+      },
       ...foodItems.reduce((result, item) => {
         // console.log(item);
 
@@ -49,9 +54,15 @@ const App = () => {
   const removeFromCart = (id) => {
     setCart((current) => {
       const next = { ...current };
+      console.log(next);
+
       if (!next[id]) return current;
-      if (next[id].quantity === 1) delete next[id];
-      else next[id] = { ...next[id], quantity: next[id].quantity - 1 };
+
+      if (next[id].quantity === 1) {
+        delete next[id];
+      } else {
+        next[id] = { ...next[id], quantity: next[id].quantity - 1 };
+      }
       return next;
     });
   };
@@ -59,7 +70,7 @@ const App = () => {
   const clearCart = () => setCart({});
 
   const cartItems = Object.values(cart);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 

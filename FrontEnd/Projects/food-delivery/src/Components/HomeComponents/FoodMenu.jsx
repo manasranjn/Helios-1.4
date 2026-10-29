@@ -12,7 +12,7 @@ const FoodMenu = ({ items, cart, onAdd, onRemove, selectedCategory }) => {
           </h2>
         </div>
         <p className="text-gray-500">
-          {items.length} {items.length !== 1 ? "items" : "item"} available
+          {items.length} {items.length > 1 ? "items" : "item"} available
         </p>
       </div>
 
@@ -25,6 +25,7 @@ const FoodMenu = ({ items, cart, onAdd, onRemove, selectedCategory }) => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {items.map((food) => {
             const quantity = cart[food.id] || 0;
+            // console.log(food);
 
             return (
               <article

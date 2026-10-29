@@ -14,12 +14,15 @@ const Cart = ({ items, onAdd, onRemove, onClear, isOpen, onClose }) => {
       <button
         aria-label="Close cart"
         onClick={onClose}
-        className="absolute inset-0 bg-black/70 cursor-default"
+        className="absolute inset-0 bg-black/60 cursor-default"
       />
       <aside className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl p-5 flex flex-col">
         <div className="flex items-center justify-between border-b pb-4">
           <h2 className="text-2xl font-bold">Your Cart</h2>
-          <button onClick={onClose} className="p-2 hover:text-orange-500">
+          <button
+            onClick={onClose}
+            className="p-2 cursor-pointer hover:text-orange-500"
+          >
             <FaTimes />
           </button>
         </div>
@@ -80,7 +83,7 @@ const Cart = ({ items, onAdd, onRemove, onClear, isOpen, onClose }) => {
           </div>
           <button
             disabled={items.length === 0}
-            className="w-full py-3 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+            className="w-full cursor-pointer  py-3 rounded-lg bg-orange-500 text-white font-semibold hover:bg-orange-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
             onClick={() => {
               alert("Order placed!");
               onClear();
@@ -91,7 +94,7 @@ const Cart = ({ items, onAdd, onRemove, onClear, isOpen, onClose }) => {
           {items.length > 0 && (
             <button
               onClick={onClear}
-              className="w-full mt-2 py-2 text-red-500 text-sm"
+              className="w-full mt-2 py-2 text-red-500 text-sm cursor-pointer"
             >
               Clear Cart
             </button>
